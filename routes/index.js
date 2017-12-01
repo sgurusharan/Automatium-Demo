@@ -3,6 +3,8 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+exports.handleRequest = function(params, res) {
+	res.render('index.html', {hello: 'HEllo'});
+	
+	res.status(200).end();
 };

@@ -1,8 +1,10 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
-    routes = require('./routes'),
+    url = require('url'),
 	path = require('path');
+
+var routes_dir = './routes';
 
 Object.assign=require('object-assign');
 
@@ -24,8 +26,31 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-app.get('/', routes.index);
-app.get('/*')
+var handleRequest = function(req, res) {
+	var q = url.parse(req.url);
+	console.log(q);
+	if (q.pathname === '/') {
+		res.redirect('/index' + q.search);
+		return;
+	}
+	try {
+		var router = require(routes_dir + q.pathname);
+		router.handleRequest(req.query, res);
+	}
+	catch (err) {
+		console.error(err.stack);
+		if (err.code === 'MODULE_NOT_FOUND') {
+			res.status(404).send("The page you are looking for is not found!");
+		}
+		else {
+			res.status(500).send('Unexpected error when processing your request!');
+		}
+	}
+};
+
+app.get('/*', handleRequest);
+
+app.post('/*', handleRequest);
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
