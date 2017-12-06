@@ -1,0 +1,10 @@
+[
+	{
+		"email": "admin@automatium.com",
+		"password": "admin"
+	},
+	{
+		"email": "abc@xyz.com",
+		"password": "abcxyzdotcom"
+	}
+]

@@ -1,8 +1,23 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #00B7FF;
 }
 
-a {
-  color: #00B7FF;
+h2 {
+	background-color: #00B7FF;
+	color: #000000;
+	margin-top: 25px;
+	padding: 10px;
+}
+
+.bordered_pane {
+	border: solid thin #000;
+	padding: 10px;
+}
+
+#notificationDiv {
+	margin-top: 20px;
+	color: #ffffff;
+	background-color:#ff0000;
+	text-align: center;
 }

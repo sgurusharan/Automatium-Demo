@@ -19,23 +19,20 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//error handling
-app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.status(500).send('Something bad happened!');
-});
+app.use(require("body-parser").urlencoded({
+    extended: true
+}));
 
 var handleRequest = function(req, res) {
 	var q = url.parse(req.url);
-	console.log(q);
 	if (q.pathname === '/') {
-		res.redirect('/index' + q.search);
+		res.redirect('/index' + (q.search ? q.search : ""));
 		return;
 	}
 	try {
 		var router = require(routes_dir + q.pathname);
-		router.handleRequest(req.query, res);
+		console.log(req.body);
+		router.handleRequest(req, res);
 	}
 	catch (err) {
 		console.error(err.stack);

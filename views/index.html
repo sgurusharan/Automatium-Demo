@@ -3,23 +3,30 @@
 	<title>
 		Automatium Demo
 	</title>
+	<link rel="stylesheet" href="/stylesheets/style.css" />
+	<script type="text/javascript" src="/scripts/index.js"></script>
 	</head>
 	
 	<body>
-	<p>
 	<h2>Login Here</h2>
+	<div class="bordered_pane">
 	<form id="loginForm" action="login" method="post">
-		Email: <input type='email' id='loginEmail' name='loginEmail' />
-		Password: <input type='password' id='loginPassword' name='loginPassword' />
+		Email: <input type='email' id='loginEmail' name='loginEmail' value="<%= (locals.loginEmail ? loginEmail : '') %>" />
+		Password: <input type='password' id='loginPassword' name='loginPassword' value="<%= (locals.loginPassword ? loginPassword : '') %>" />
 		<input id='loginButton' type='submit' value='Go' />
 	</form>
-	<p>
+	</div>
 	<h2>Register Here</h2>
+	<div class="bordered_pane">
 	<form id='registerForm' action='register' method='post'>
-		Email: <input type='email' id='registerEmail' name='registerEmail' /><br />
-		Password: <input type='password' id='registerPassword' name='registerPassword' /><br />
-		Reenter Password: <input type='password' id='registerRePassword' name='registerRePassword' /><br />
+		Email: <input type='email' id='registerEmail' name='registerEmail' value="<%= (locals.registerEmail ? registerEmail : '') %>" />
+		Password: <input type='password' id='registerPassword' name='registerPassword' value="<%= (locals.registerPassword ? registerPassword : '') %>" />
+		Reenter Password: <input type='password' id='registerRePassword' name='registerRePassword' value="<%= (locals.registerRePassword ? registerRePassword : '') %>" />
 		<input id='registerButton' type='submit' value='Register' />
 	</form>
+	</div>
+	<div id="notificationDiv">
+		<%= (locals.notification ? notification : '') %>
+	</div>
 	</body>
 </html>

@@ -3,8 +3,8 @@
  * GET home page.
  */
 
-exports.handleRequest = function(params, res) {
-	res.render('index.html', {hello: 'HEllo'});
+exports.handleRequest = function(req, res) {
+	res.render('index.html');
 	
 	res.status(200).end();
 };
